@@ -140,16 +140,27 @@ function startRound(number) {
             definitionButton.addEventListener("click", function () {
                 if (selectedTerm == null) return;
 
-                selectedTermButton.hidden = true;
-                definitionButton.hidden = true;
-
-                if (definition === selectedTermDefinition) {
-                    correct.push(termObject);
-                } else {
-                    incorrect.push(termObject);
-                }
+                var termDefinition = selectedTermDefinition;
+                var termButton = selectedTermButton;
 
                 roundTerms = roundTerms.filter((obj) => obj.term !== selectedTerm);
+
+                definitionButton.disabled = true;
+
+                if (definition === termDefinition) {
+                    correct.push(termObject);
+                    termButton.style.backgroundColor = "green";
+                    definitionButton.style.backgroundColor = "green";
+                } else {
+                    incorrect.push(termObject);
+                    termButton.style.backgroundColor = "red";
+                    definitionButton.style.backgroundColor = "red";
+                }
+
+                setTimeout(() => {
+                    termButton.hidden = true;
+                    definitionButton.hidden = true;
+                }, 1000)
 
                 if (roundTerms.length > 0) selectedTerm = null;
                 else if (terms.length > 0) startRound(number + 1);
@@ -192,8 +203,11 @@ function playAgain() {
     terms = correct.concat(incorrect);
     correct = [];
     incorrect = [];
+
+    initialDiv.hidden = false;
     resultDiv.hidden = true;
-    startGame();
+
+    updateTable()
 }
 
 function resetGame() {
