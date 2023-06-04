@@ -6,6 +6,11 @@ var initialDiv = document.getElementById("initial");
 var roundDiv = document.getElementById("round");
 var resultDiv = document.getElementById("result");
 
+var isManual = true;
+var manualInput = document.getElementById("manualInput");
+var dataInput = document.getElementById("dataInput");
+var data = document.getElementById("data");
+
 var term = document.getElementById("term");
 var definition = document.getElementById("definition");
 var termTable = document.getElementById("termTable");
@@ -94,6 +99,50 @@ function addTerm() {
 function removeTerm(index) {
     terms = terms.splice(index, 1);
     updateTable();
+}
+
+function switchInput() {
+    if (isManual) {
+        manualInput.hidden = true;
+        dataInput.hidden = false;
+    } else {
+        manualInput.hidden = false;
+        dataInput.hidden = true;
+    }
+    isManual = !isManual;
+}
+
+function importTerms() {
+    var newTerms = data.value.trim().split("\n");
+
+    for (var i = 0; i < newTerms.length; i++) {
+        var parts = newTerms[i].trim().split(",");
+
+        if (parts.length < 2) {
+            alert("Invalid data.");
+            return;
+        }
+
+        var newTerm = parts[0].trim();
+        var newDefinition = parts[1].trim();
+
+        if (newTerm && newDefinition) {
+            var existingIndex = terms.findIndex(function (termObject) {
+                return termObject.term.toLowerCase() === newTerm.toLowerCase();
+            });
+
+            if (existingIndex === -1) {
+                var termObject = {
+                    term: newTerm,
+                    definition: newDefinition,
+                };
+
+                terms.push(termObject);
+            }
+        }
+
+        updateTable();
+    }
 }
 
 function startGame() {

@@ -13,15 +13,37 @@
     <div id="initial">
         <h1>Matching Game</h1>
         <p>Enter at least 5 terms to start the game.</p>
-        <form>
-            <label for="term">Term:</label>
-            <input type="text" id="term" required><br>
+        <div id="manualInput">
+            <form>
+                <div class="form-group">
+                    <label for="term">Term:</label>
+                    <input type="text" id="term" required>
+                </div>
 
-            <label for="definition">Definition:</label>
-            <input type="text" id="definition" required><br>
+                <div class="form-group">
+                    <label for="definition">Definition:</label>
+                    <input type="text" id="definition" required>
+                </div>
 
-            <button type="button" onclick="addTerm()">Add Term</button>
-        </form>
+                <div class="button-group">
+                    <button type="button" onclick="addTerm()">Add Term</button>
+                    <button type="button" onclick="switchInput()">Switch Input</button>
+                </div>
+            </form>
+        </div>
+        <div id="dataInput" hidden>
+            <form>
+                <div class="form-group">
+                    <label for="data">Data:</label>
+                    <textarea id="data" name="data" placeholder="term,definition" required></textarea>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" onclick="importTerms()">Import Terms</button>
+                    <button type="button" onclick="switchInput()">Switch Input</button>
+                </div>
+            </form>
+        </div>
         <table id="termTable">
             <thead>
                 <tr>
@@ -61,8 +83,10 @@
             </thead>
             <tbody></tbody>
         </table>
-        <button type="button" onclick="playAgain()">Play Again</button>
-        <button type="button" onclick="resetGame()">Reset Game</button>
+        <div class="button-group">
+            <button type="button" onclick="playAgain()">Play Again</button>
+            <button type="button" onclick="resetGame()">Reset Game</button>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
