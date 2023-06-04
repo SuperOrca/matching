@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="initial">
+        <h1>Matching Game</h1>
+        <form>
+            <label for="term">Term:</label>
+            <input type="text" id="term" required><br>
+
+            <label for="definition">Definition:</label>
+            <input type="text" id="definition" required><br>
+
+            <button type="button" onclick="addTerm()">Add Term</button>
+        </form>
+        <table id="termTable">
+            <thead>
+                <tr>
+                    <th>Term</th>
+                    <th>Definition</th>
+                    <th>Remove?</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <button type="button" onclick="startGame()" id="start" disabled>Start Game</button>
+    </div>
+    <div id="round" hidden>
+        <h1 id="roundNumber"></h1>
+        <table id="roundTable">
+            <thead>
+                <tr>
+                    <th>Term</th>
+                    <th>Definition</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div id="result" hidden>
+        <h1>Result</h1>
+        <h2>Accuracy</h2>
+        <span id="accuracy"></span>
+        <h2>Incorrect Answers</h2>
+        <table id="resultTable">
+            <thead>
+                <tr>
+                    <th>Term</th>
+                    <th>Definition</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <button type="button" onclick="resetGame()">Reset Game</button>
+        <button type="button" onclick="playAgain()">Play Again</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
